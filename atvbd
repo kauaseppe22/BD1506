@@ -1,0 +1,30 @@
+create table produtos(
+id_produto int identity(1,1)PRIMARY KEY,
+nomeProduto varchar(100),
+);
+
+create table clientes(
+id_cliente int identity(1,1)PRIMARY KEY,
+nomeCliente varchar(100),
+idade int
+);
+create table vendas(
+id_vendas int identity(1,1)PRIMARY KEY,
+id_clientes int,
+id_produto int
+);
+ALTER TABLE vendas add constraint fk_produtos foreign key (id_produtos) references produtos(id_produtos);
+ALTER TABLE vendas add constraint fk_clientes foreign key (id_clientes) references produtos(id_clientes);
+
+insert into produtos(nomeProduto) values ('remedio'),('chá vick'),('escova de dentes'),('seringa'),('soro fisiologico');
+select * from produtos
+insert into clientes(nomeCliente, idade) values ('kaua' , '17'),('bruna' , '18'),('bruce' , '16'),('caio' , '22'),('henrique', '19');
+select * from clientes
+insert into vendas (id_clientes, id_produto) values ('1','1'),('3','4'),('2','2'),('1','3'),('4','4'),('5','2'),('5','1');
+select * from vendas 
+select c.id_cliente, c.nomeCliente, p.nomeProduto, p.id_produto 
+from vendas as v 
+join clientes as c on c.id_cliente * v.id_cliente 
+join produtos as p on p.id_produto * v.id_produto
+select c.id_cliente, c.nomeCliente, p.nomeProduto, p.id_produto from vendas as v right join clientes as c on c, id_cliente = v.id_clientes right join produtos as p on p,
+id_produto * v.id_produto
